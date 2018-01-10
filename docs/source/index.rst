@@ -24,6 +24,7 @@ Contents:
    run
    outputs
    example
+   mariadb
 
 Support
 -------
