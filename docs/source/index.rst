@@ -13,7 +13,7 @@ For more details please see:
 
 2. McMahon, A.C.,  Rahman, R., Jin, H., Shen, J.L., Fieldsend, A., Luo, W., Rosbash, M., TRIBE: Hijacking an RNA-Editing Enzyme to Identify Cell-Specific Targets of RNA-Binding Proteins. Cell 165, 742-753 (2016)
 
-**For previous version of this software (TRIBE), please visit `GitHub <https://github.com/rosbashlab/TRIBE>`_ **
+**For previous version of this software (TRIBE), please visit** `GitHub <https://github.com/rosbashlab/TRIBE>`_
 
 Contents:
 
