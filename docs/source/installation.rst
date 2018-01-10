@@ -29,7 +29,7 @@ Download the source code from github.
 
 Install MySQL (MariaDB) database and Perl modules
 -------------------------------------------------
-Install MariaDB, here is a helpful `resource <http://tribe-tool.readthedocs.io/en/latest/mariadb.html>`_. Once the root password is set, log in to MySQL using the root password. 
+Install MariaDB, here is a helpful `resource <http://hypertribe.readthedocs.io/en/latest/mariadb.html>`_. Once the root password is set, log in to MySQL using the root password. 
 ::
 
     mysql -h localhost -u root -p
