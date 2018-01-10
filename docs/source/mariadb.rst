@@ -63,7 +63,7 @@ In this fashion, MariaDB 10.1 has been securely installed onto your system. In t
 Log into the MySQL shell as *root*:
 ::
 
-    mysql -u root -p
+    mysql -h localhost -u root -p
 
 Type the MariaDB root password you set earlier when prompted.
 
