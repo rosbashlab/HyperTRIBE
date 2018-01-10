@@ -78,9 +78,9 @@ Edit the perl script “diagnose_mysql_table.pl” to provide mysql username (in
 
 This script calculates the total number of entries in the given MySQL table and ensures that it is equal to total number of lines of all the matrix files used for that table.
 
-3. Find RNA edit sites using gDNA-RNA approaches
-------------------------------------------------
-Finally, we find RNA editing sites by comparing the gDNA and RNA sequence in mysql tables. For each position in the genome, the base composition is looked up using the tablename, expt name and replicate/timepoint integer. 
+3.A. Find RNA edit sites using gDNA-RNA approaches
+--------------------------------------------------
+Find RNA editing sites by comparing the gDNA and RNA sequence in mysql tables. For each position in the genome, the base composition is looked up using the tablename, expt name and replicate/timepoint integer. 
 
 Copy rnaedit_gDNA_RNA.sh to your working directory
 ::
@@ -111,8 +111,8 @@ This shell script runs a perl script called “find_rnaeditsites.pl”, which do
 
 
 
-3. Find RNA edit sites using wtRNA-RNA approaches
--------------------------------------------------
+3.B. Find RNA edit sites using wtRNA-RNA approaches
+---------------------------------------------------
 Find RNA editing sites by using the wtRNA-RNA approach as an alternative to previous step. 
 
 Copy rnaedit_wtRNA_RNA.sh to your working directory
@@ -143,8 +143,8 @@ Now, run the updated shell script from current directory
 This shell script runs a perl script called “find_rnaeditsites.pl”, which does a pairwise comparison of wtRNA against RNA for each nucleotide in the transcriptome to call a set of editing sites. It then runs a python script “Threshold_editsites_20reads.py” to ensure that the editing sites are required to have at least 10% editing and at least a coverage of 20 reads. The output for this shell script is a list of editing sites in bedgraph format for each pairwise comparison, in this case there will be three bedgraph files with editing sites for: 1) HyperTRIBE_rep1: rnalibs_2_3_AG2.bedgraph; 2) HyperTRIBE_rep2: rnalibs_2_4_AG2.bedgraph; and 3) HyperADARcd_rep1: rnalibs_2_5_AG2.bedgraph.
 
 
-Post-processing of editing outputsOutputs
------------------------------------------
+4. Post-processing of editing outputsOutputs
+--------------------------------------------
 Create high confidence set of HyperTRIBE editing sites for gDNA-RNA approach.
 Use bedtools intersect to find the overlap between two HyperTRIBE replicates
 ::
@@ -164,3 +164,34 @@ Create high confidence set of HyperTRIBE editing sites for wtRNA-RNA approach as
     bedtools intersect -wa -v -f 0.9 -r -a present_both_wtRNA.bed -b rnalibs_2_5_AG2.bedgraph > HyperTRIBE_1_2_wtRNA.bedgraph
 
 These editing sites can be visualized on IGV.
+
+5. Column descriptions for bedgraph output files
+------------------------------------------------
+Description of column header in the bedgraph files are provided below: 
+1. Chr name
+2. Start coordinate
+3. End coordinate
+4. Editing percentage
+5. Concatenation of editing percentage and reads
+6. Chr name
+7. Edit Coordinate
+8. Name
+9. Type
+10. A count
+11. T count
+12. C count
+13. G count
+14. Total nucleotide count
+15. A count from gDNA/wtRNA
+16. T count from gDNA/wtRNA
+17. C count from gDNA/wtRNA
+18. G count from gDNA/wtRNA
+19. Total count from gDNA/wtRNA
+20. Editbase Count
+21. Total nucleotide count
+22. Editbase count from gDNA/wtRNA
+23. Total nucleotide count from gDNA/wtRNA.
+
+
+
+
