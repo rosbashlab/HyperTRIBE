@@ -49,7 +49,9 @@ After exiting MySQL, install MariaDB-devel
 Install the perl modules using cpan or cpanm if they are not pre-installed in your operating system.
 ::
 
+    #install DBI.pm
     cpan DBI
+    #install DBD::mysql
     cpan DBD::mysql    
 
 
