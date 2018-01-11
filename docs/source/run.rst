@@ -192,6 +192,17 @@ Description of column header in the bedgraph files are provided below:
 22. Editbase count from gDNA/wtRNA
 23. Total nucleotide count from gDNA/wtRNA.
 
+Create list of Edited Transcripts
+---------------------------------
+Create a list of transcripts that are marked by editing and summarize editing results. Create gene list and summary for gDNA-RNA approach:
+::
+
+    perl /path_from_root/HyperTRIBE/CODE/summarize_results.pl HyperTRIBE_1_2_gDNA.bedgraph > HyperTRIBE_results_gDNA.xls
+
+Create gene list and summary for wtRNA-RNA approach:
+::
+
+    perl /path_from_root/HyperTRIBE/CODE/summarize_results.pl HyperTRIBE_1_2_wtRNA.bedgraph > HyperTRIBE_results_wtRNA.xls
 
 
 
