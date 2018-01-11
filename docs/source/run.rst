@@ -149,9 +149,9 @@ Create high confidence set of HyperTRIBE editing sites for gDNA-RNA approach.
 Use bedtools intersect to find the overlap between two HyperTRIBE replicates
 ::
 
-    bedtools intersect -wa -wb -f 0.9 -r -a rnalibs_25_3_AG2.bedgraph -b rnalibs_25_4_AG2.bedgraph > present_both.bed
+    bedtools intersect -wa -wb -f 0.9 -r -a rnalibs_25_3_AG2.bedgraph -b rnalibs_25_4_AG2.bedgraph > present_both.bedgraph
     #Remove background (S2 wtRNA) editing sites:
-    bedtools intersect -wa -v -f 0.9 -r -a present_both.bed -b rnalibs_25_2_AG2.bedgraph > temp.bed
+    bedtools intersect -wa -v -f 0.9 -r -a present_both.bedgraph -b rnalibs_25_2_AG2.bedgraph > temp.bed
     #Remove HyperADARcd editing sites:
     bedtools intersect -wa -v -f 0.9 -r -a temp.bed -b rnalibs_25_5_AG2.bedgraph > HyperTRIBE_1_2_gDNA.bedgraph
 
@@ -159,9 +159,9 @@ Use bedtools intersect to find the overlap between two HyperTRIBE replicates
 Create high confidence set of HyperTRIBE editing sites for wtRNA-RNA approach as an alternative. Use bedtools to find the overlap between two HyperTRIBE replicates
 ::
 
-    bedtools intersect -wa -wb -f 0.9 -r -a rnalibs_2_3_AG2.bedgraph -b rnalibs_2_4_AG2.bedgraph > present_both_wtRNA.bed
+    bedtools intersect -wa -wb -f 0.9 -r -a rnalibs_2_3_AG2.bedgraph -b rnalibs_2_4_AG2.bedgraph > present_both_wtRNA.bedgraph
     #Remove HyperADARcd editing sites:
-    bedtools intersect -wa -v -f 0.9 -r -a present_both_wtRNA.bed -b rnalibs_2_5_AG2.bedgraph > HyperTRIBE_1_2_wtRNA.bedgraph
+    bedtools intersect -wa -v -f 0.9 -r -a present_both_wtRNA.bedgraph -b rnalibs_2_5_AG2.bedgraph > HyperTRIBE_1_2_wtRNA.bedgraph
 
 These editing sites can be visualized on IGV.
 
