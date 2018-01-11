@@ -26,7 +26,7 @@ Repeat these steps for the other files and produce these fastq files: S2_wtRNA.f
 
 1. Trim and align libraries
 ---------------------------
-Trim low quality bases from either ends of reads in genomic DNA and RNA libraries (fastq files), and then align to reference genome or transcriptome. The alignments to the transcriptome are then processed by Picard to remove PCR duplicates. Run the “trim_and_align_gDNA.sh” shell script for gDNA library. The output of this shell script is “S2_gDNA.sam” which records the alignment to the genome.
+Trim low quality bases from either ends of reads in genomic DNA and RNA libraries (fastq files), and then align to reference genome or transcriptome.The alignments are sorted by using samtools. Run the “trim_and_align_gDNA.sh” shell script for gDNA library.
 
 A. Trim and align gDNA Libraries
 ::
@@ -40,7 +40,7 @@ B. RNA Libraries
 
     nohup /path_from_root/HyperTRIBE/CODE/trim_and_align.sh S2_wtRNA.fastq &
 
-The output of this shell script is “S2_wtRNA.sort.sam” which records the alignment to the transcriptome in SAM format. Repeat this step for the other RNA libraries.
+The output of this shell script is “S2_wtRNA.sort.sam” which records the alignment to the transcriptome in SAM format. In addition, the alignments have been processed by Picard to remove PCR duplicates. Repeat this step for the other RNA libraries.
 
 2. Load Alignments to MySQL
 ---------------------------
@@ -107,7 +107,7 @@ Now, run the updated shell script from current directory
 
     ./rnaedit_gDNA_RNA.sh
 
-This shell script runs a perl script called “find_rnaeditsites.pl”, which does a pairwise comparison of gDNA against RNA for each nucleotide in the transcriptome to call a set of editing sites (minimum coverage of nucleotide in reference table is 9). It then runs the python script “Threshold_editsites_20reads.py” to ensure that the editing sites are required to have at least 10% editing and at least a coverage of 20 reads. The output for this shell script is a list of editing sites in bedgraph format for each pairwise comparison. In this case there will be four bedgraph files with editing sites for: 1) S2_wtRNA: rnalibs_25_2_AG2.bedgraph; 2) HyperTRIBE_rep1: rnalibs_25_3_AG2.bedgraph; 3) HyperTRIBE_rep2: rnalibs_25_4_AG2.bedgraph; and 4) HyperADARcd_rep1: rnalibs_25_5_AG2.bedgraph
+This shell script runs a perl script called “find_rnaeditsites.pl”, which does a pairwise comparison of gDNA against RNA for each nucleotide in the transcriptome to call a set of editing sites (minimum coverage of nucleotide in reference table is 9). It then runs the python script “Threshold_editsites_20reads.py” to ensure that the editing sites are required to have at least 10% editing and at least a coverage of 20 reads. The output for this shell script is a list of editing sites in bedgraph format for each pairwise comparison. In this case there will be four bedgraph files with editing sites for: 1) S2_wtRNA: rnalibs_25_2_A2G.bedgraph; 2) HyperTRIBE_rep1: rnalibs_25_3_A2G.bedgraph; 3) HyperTRIBE_rep2: rnalibs_25_4_A2G.bedgraph; and 4) HyperADARcd_rep1: rnalibs_25_5_A2G.bedgraph
 
 
 
@@ -140,7 +140,7 @@ Now, run the updated shell script from current directory
 
     ./rnaedit_wtRNA_RNA.sh
 
-This shell script runs a perl script called “find_rnaeditsites.pl”, which does a pairwise comparison of wtRNA against RNA for each nucleotide in the transcriptome to call a set of editing sites. It then runs a python script “Threshold_editsites_20reads.py” to ensure that the editing sites are required to have at least 10% editing and at least a coverage of 20 reads. The output for this shell script is a list of editing sites in bedgraph format for each pairwise comparison, in this case there will be three bedgraph files with editing sites for: 1) HyperTRIBE_rep1: rnalibs_2_3_AG2.bedgraph; 2) HyperTRIBE_rep2: rnalibs_2_4_AG2.bedgraph; and 3) HyperADARcd_rep1: rnalibs_2_5_AG2.bedgraph.
+This shell script runs a perl script called “find_rnaeditsites.pl”, which does a pairwise comparison of wtRNA against RNA for each nucleotide in the transcriptome to call a set of editing sites. It then runs a python script “Threshold_editsites_20reads.py” to ensure that the editing sites are required to have at least 10% editing and at least a coverage of 20 reads. The output for this shell script is a list of editing sites in bedgraph format for each pairwise comparison, in this case there will be three bedgraph files with editing sites for: 1) HyperTRIBE_rep1: rnalibs_2_3_A2G.bedgraph; 2) HyperTRIBE_rep2: rnalibs_2_4_A2G.bedgraph; and 3) HyperADARcd_rep1: rnalibs_2_5_A2G.bedgraph.
 
 
 4. Post-processing of editing outputsOutputs
@@ -149,19 +149,19 @@ Create high confidence set of HyperTRIBE editing sites for gDNA-RNA approach.
 Use bedtools intersect to find the overlap between two HyperTRIBE replicates
 ::
 
-    bedtools intersect -wa -wb -f 0.9 -r -a rnalibs_25_3_AG2.bedgraph -b rnalibs_25_4_AG2.bedgraph > present_both.bedgraph
+    bedtools intersect -wa -wb -f 0.9 -r -a rnalibs_25_3_A2G.bedgraph -b rnalibs_25_4_A2G.bedgraph > present_both.bedgraph
     #Remove background (S2 wtRNA) editing sites:
-    bedtools intersect -wa -v -f 0.9 -r -a present_both.bedgraph -b rnalibs_25_2_AG2.bedgraph > temp.bed
+    bedtools intersect -wa -v -f 0.9 -r -a present_both.bedgraph -b rnalibs_25_2_A2G.bedgraph > temp.bed
     #Remove HyperADARcd editing sites:
-    bedtools intersect -wa -v -f 0.9 -r -a temp.bed -b rnalibs_25_5_AG2.bedgraph > HyperTRIBE_1_2_gDNA.bedgraph
+    bedtools intersect -wa -v -f 0.9 -r -a temp.bed -b rnalibs_25_5_A2G.bedgraph > HyperTRIBE_1_2_gDNA.bedgraph
 
 
 Create high confidence set of HyperTRIBE editing sites for wtRNA-RNA approach as an alternative. Use bedtools to find the overlap between two HyperTRIBE replicates
 ::
 
-    bedtools intersect -wa -wb -f 0.9 -r -a rnalibs_2_3_AG2.bedgraph -b rnalibs_2_4_AG2.bedgraph > present_both_wtRNA.bedgraph
+    bedtools intersect -wa -wb -f 0.9 -r -a rnalibs_2_3_A2G.bedgraph -b rnalibs_2_4_A2G.bedgraph > present_both_wtRNA.bedgraph
     #Remove HyperADARcd editing sites:
-    bedtools intersect -wa -v -f 0.9 -r -a present_both_wtRNA.bedgraph -b rnalibs_2_5_AG2.bedgraph > HyperTRIBE_1_2_wtRNA.bedgraph
+    bedtools intersect -wa -v -f 0.9 -r -a present_both_wtRNA.bedgraph -b rnalibs_2_5_A2G.bedgraph > HyperTRIBE_1_2_wtRNA.bedgraph
 
 These editing sites can be visualized on IGV.
 
@@ -192,8 +192,8 @@ Description of column header in the bedgraph files are provided below:
 22. Editbase count from gDNA/wtRNA
 23. Total nucleotide count from gDNA/wtRNA.
 
-Create list of Edited Transcripts
----------------------------------
+6. Create list of Edited Transcripts
+------------------------------------
 Create a list of transcripts that are marked by editing and summarize editing results. Create gene list and summary for gDNA-RNA approach:
 ::
 
