@@ -47,18 +47,14 @@ else:
               		        Total = float(ElementList [15])
                         	percentG = (float(G/Total))*100
                 #print 'percent G: ' + str(percentG)
-                        	ElementList.insert(18,percentG)
-	 	# create score	
-                		score = (float(G/Total))*1000
-				ElementList.insert(19,score)
+                #        	ElementList.insert(18,percentG)
 		# create name in format X%_xr
 				name = str(int(percentG)) + '%_' + str(ElementList[15]) + 'r' 
 				#print name 
-				ElementList.insert(20, name)		
 		# create uniq ID
 				ID = ElementList[0] + '_' + ElementList[1]
 				#print ID
-				ElementList.insert(21, ID)
+				ElementList.insert(18, ID)
 
 				#print LineNumber, ":", ElementList			
 			
@@ -68,7 +64,8 @@ else:
 
 				
                 #create bed format
-                        	forbed = str(ElementList[0]) + "\t" + str(ElementList[1]) + "\t" + str(ElementList[1]) + "\t" + str(ElementList[18]) + "\t" + str(ElementList[20]) + "\t" + strList
+                #        	forbed = str(ElementList[0]) + "\t" + str(ElementList[1]) + "\t" + str(ElementList[1]) + "\t" + str(ElementList[18]) + "\t" + str(ElementList[20]) + "\t" + strList
+                                forbed = str(ElementList[0]) + "\t" + str(ElementList[1]) + "\t" + str(ElementList[1]) + "\t" + str(int(percentG)) + "\t" + str(name) + "\t" + strList
                         	Outfile.write(forbed + "\n")
 	
                 # Index the counter used to keep track of line numbers
