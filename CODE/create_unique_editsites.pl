@@ -2,10 +2,9 @@
 use strict;
 use warnings;
 use Getopt::Std;
-
+# remove duplicate editing sites from overlapping genes on same strand
+# this will reduce your list of target genes, so use this code with Caution
 my ($bedgraph_file)= $ARGV[0];
-#my $outputfile = $bedgraph_file.".out";
-
 my $hash = {};
 
 open(my $BEDFILE, "<", $bedgraph_file) 
@@ -17,7 +16,8 @@ while ( my $line = <$BEDFILE> ) {
     # skip header trackname line
     next if ($line=~/^trackname/);   
     my @arr = split(/\t/, $line);
-    my $loci = $arr[26];
+    my $loci = $arr[23];
+#    my $loci = $arr[26];
 #    $loci =~s/\s//g;
     if (exists $hash->{$loci}) {
 	next;
