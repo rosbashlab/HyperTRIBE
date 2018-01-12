@@ -172,7 +172,7 @@ Description of column header in the bedgraph files are provided below:
 2. Start coordinate
 3. End coordinate
 4. Editing percentage
-5. Concatenation of editing percentage and reads
+5. Concatenation of editing percentage and reads (Total reads in HyperTRIBE RNA)
 6. Chr name
 7. Edit Coordinate
 8. Name
@@ -190,7 +190,8 @@ Description of column header in the bedgraph files are provided below:
 20. Editbase Count
 21. Total nucleotide count
 22. Editbase count from gDNA/wtRNA
-23. Total nucleotide count from gDNA/wtRNA.
+23. Total nucleotide count from gDNA/wtRNA
+24. Identifier (chr name and coordinate)
 
 6. Create list of Edited Transcripts
 ------------------------------------
