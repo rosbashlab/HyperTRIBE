@@ -10,9 +10,9 @@ use warnings;
 # col 1: gene name
 # col 2: number of editing sites for gene
 # col 3: Avg editing percentage
-# col 4: edit_percentage_read concatenation for each replicate, separated by comma (13%_29r,13%_29r). ";" is used to separate between different sites
-# col 5: gene feature concatenation, separated by comma (EXON,INTRON). ";" is used to separate between different sites
-# col 6: Edit identifier concatenation, separated by comma. ";" is used to separate between different sites
+# col 4: edit_percentage_read concatenation for each replicate, separated by comma (13%_29r,13%_29r). ";" is used to separate between different editing sites
+# col 5: gene feature concatenation, separated by comma (EXON,INTRON). ";" is used to separate between different editing sites
+# col 6: Edit identifier concatenation, separated by comma. ";" is used to separate between different editing sites
 #
 #--------------------
 #IMPORTANT PLEASE READ: gene name for all replicates at for a given edit site should be identical, otherwise these are sites from overlapping genes. These cross overlapping sites are skipped because they are counted twice. Hence, the number of edit sites reported by this script may not equal the number of lines in the bedgraph file.
