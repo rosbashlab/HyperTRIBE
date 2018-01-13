@@ -205,5 +205,10 @@ Create gene list and summary for wtRNA-RNA approach:
 
     perl /path_from_root/HyperTRIBE/CODE/summarize_results.pl HyperTRIBE_1_2_wtRNA.bedgraph > HyperTRIBE_results_wtRNA.xls
 
-
-
+Description of the column headers for output file.
+1) gene name
+2) number of editing sites for gene
+3) Avg editing percentage
+4) edit_percentage_read concatenation for each replicate, separated by "," (13%_29r,13%_29r). ";" is used to separate between different editing sites
+5) gene feature concatenation, separated by comma (EXON,INTRON). ";" is used to separate between different editing sites
+6) Edit identifier concatenation, separated by comma ",". ";" is used to separate between different editing sites
