@@ -97,7 +97,9 @@ my $genes = {};
 while(<FH>){
     chomp;
     my $line = $_;
-    next if ($line=~/^[\#\n]/); #
+    next if ($line=~/^[\#\n]/); # skip header line
+    next if ($line=~/^name/); # skip header line
+    
     my($gene,$chr,$strand,$sString,$eString) = (split(/\t/,$line))[0,2,3,9,10]; #fly
     next if ($chr=~/chrUextra/); #the annotations in chrUextra are not considered
     next if ($gene=~/^His.*:/); #remove the Histone genes
@@ -125,7 +127,7 @@ close FH;
 #my $OUTFILE = "rnaedit_$exp\.$filesuffix\.txt";
 open(OUT,">$OUTFILE") or die $!;
 
-#OUTPUT ANY INSTANCE OF AN EDITING EVENT.  FILTER OUT IN MANUALLY! 3/21/2011
+#OUTPUT ANY INSTANCE OF AN EDITING EVENT. 
 print OUT "Chr\tEdit_coord\tName\tType\tA_count\tT_count\tC_count\tG_count\tTotal_count\tA_count_gDNA/wtRNA\tT_count_gDNA/wtRNA\tC_count_gDNA/wtRNA\tG_count_gDNA/wtRNA\tTotal_count_gDNA/wtRNA\tEditbase_count\tTotal_count\tEditbase_count_gDNA/wtRNA\tTotal_count_gDNA/wtRNA\n";
 
 foreach my $chr (keys %{$genes}){
