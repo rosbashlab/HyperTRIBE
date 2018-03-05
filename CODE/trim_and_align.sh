@@ -21,7 +21,7 @@ avgquality="25"
 
 # Trimmomatics is used to remove low quality bases from either end of the reads. Reads with avg quality score of less than 25 are also removed. Please free to use similar software instead of Trimmomatics
 
-java -jar $TRIMMOMATIC_JAR SE -phred33 $trim_input $trim_outfile LEADING:25 TRAILING:25 AVGQUAL:$avgquality MINLEN:19
+java -jar $TRIMMOMATIC_JAR SE -phred33 $trim_input $trim_outfile HEADCROP:6 LEADING:25 TRAILING:25 AVGQUAL:$avgquality MINLEN:19
 
 # Align library with STAR
 input=$trim_outfile
