@@ -7,7 +7,7 @@ PICARD_JAR="/opt/PICARD/2.8.2/picard.jar"
 #GENOME_FAI_FILE="/home/analysis/genome/dm6/genome.fa.fai"
 #---------End Update variable------------
 
-# Use the loop below to trim_and_align.sh 
+# Use the loop below to run the code for multiple fastq files
 #filelist=`ls *.fastq`#
 #for file in ${filelist[@]}
 #do
@@ -19,7 +19,7 @@ trim_input=$file
 trim_outfile=$prefix.trim.fastq 
 avgquality="25"
 
-# Trimmomatics is used to remove low quality bases from either end of the reads. Reads with avg quality score of less than 25 are also removed. Please free to use similar software instead of Trimmomatics
+# The first six nucleotide of the read is removed due to pontential error from random hexamer mispriming. Trimmomatics is used to remove low quality bases from either end of the reads. Reads with avg quality score of less than 25 are also removed. Please free to use similar software instead of Trimmomatics
 
 java -jar $TRIMMOMATIC_JAR SE -phred33 $trim_input $trim_outfile HEADCROP:6 LEADING:25 TRAILING:25 AVGQUAL:$avgquality MINLEN:19
 

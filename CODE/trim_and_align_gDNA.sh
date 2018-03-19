@@ -13,7 +13,7 @@ trim_outfile=$prefix.trim.fastq
 avgquality="25"
 
 # ----------- trim low quality bases and remove low quality reads ---------
-# Trimmomatics is used to remove low quality bases from either end of the reads. Reads with avg quality score of less than 25 are also removed. Please free to use similar software instead of Trimmomatics
+# The first six nucleotide of the read is removed due to pontential error from random hexamer mispriming. Trimmomatics is used to remove low quality bases from either end of the reads. Reads with avg quality score of less than 25 are also removed. Please free to use similar software instead of Trimmomatics
 
 java -jar $TRIMMOMATIC_JAR SE -phred33 $trim_input $trim_outfile HEADCROP:6 LEADING:25 TRAILING:25 AVGQUAL:$avgquality MINLEN:19
 
