@@ -1,8 +1,10 @@
 # HyperTRIBE
 HyperTRIBE is a technique used for the identification of the targets of RNA binding proteins (RBP) in vivo. This is an improved version of a previously developed technique called TRIBE (Targets of RNA-binding proteins Identified By Editing).
 
-Detailed doumentation is available at: http://hypertribe.readthedocs.io/en/latest/
+Please download the code from GitHub.
+[![DOI](https://zenodo.org/badge/114820120.svg)](https://zenodo.org/badge/latestdoi/114820120)
 
+Detailed doumentation is available at: http://hypertribe.readthedocs.io/en/latest/
 
 For more details please see:
 
