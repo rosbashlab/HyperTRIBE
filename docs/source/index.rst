@@ -1,8 +1,7 @@
 Documentation for HyperTRIBE
 ============================
 For source code please visit `GitHub <https://github.com/rosbashlab/HyperTRIBE>`_
-.. image:: https://zenodo.org/badge/114820120.svg
-   :target: https://zenodo.org/badge/latestdoi/114820120
+
 
 About HyperTRIBE
 ----------------
