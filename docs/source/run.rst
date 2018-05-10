@@ -42,8 +42,8 @@ B. RNA Libraries
 
 The output: “S2_wtRNA.sort.sam” records the alignment to the transcriptome in SAM format. These alignments are processed by Picard to remove PCR duplicates. Repeat this step for the other RNA libraries.
 
-2. Load alignments data to MySQL database
------------------------------------------
+2. Load alignment data to MySQL database
+----------------------------------------
 Convert alignment in SAM format to a matrix format, which records nucleotide frequency at each position in the transcriptome/genome. This data is then uploaded to a MySQL table based on the arguments provided.
 
 Run the “load_table.sh” script with four arguments: 1. SAM file name 2. MySQL table name 3. Experiment name (unique identifier for the sequence library; include alphabets and digits) 4. An integer reflecting replicate/time-point. The combination of MySQL table name, experiment name, and replicate/time-point integer must be unique for each library. 
@@ -52,7 +52,7 @@ Run the “load_table.sh” script with four arguments: 1. SAM file name 2. MySQ
     nohup /path_from_root/HyperTRIBE/CODE/load_table.sh sam_filename mysql_tablename expt_name replicate/timepoint &
     #1. sam_filename
     #2. mysql_tablename
-    #3. expt_name (unique identifier for the experiment, include alphabets and digits). Create short names.
+    #3. expt_name (unique identifier for the experiment, include alphabets and digits). Create short names. The expt_name cannot be longer than 20 characters.
     #4. replicate or timepoint: This is has to be an integer
 
 Example for gDNA library
@@ -67,7 +67,7 @@ Example for RNA library
 
 Repeat for the other RNA libraries with appropriate arguments, for example: Hrp48_HyperTRIBE_rep1.sort.sam testRNA rnalibs 3; Hrp48_HyperTRIBE_rep2.sort.sam testRNA rnalibs 4; HyperADARcd_rep1.sort.sam testRNA rnalibs 3
 
-**Carefully note the last three arguments for all the load_table.sh runs for each library because these values are needed in the next step of the analysis.**
+**Carefully note the last three arguments for all the load_table.sh runs for each library because these values are needed in the next step of the analysis. The expt_name cannot be longer than 20 characters**
 
 Optional: Confirm MySQL Tables contains the data
 ------------------------------------------------
