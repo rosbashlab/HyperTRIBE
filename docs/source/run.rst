@@ -65,7 +65,7 @@ Example for RNA library
     
     nohup /path_from_root/HyperTRIBE/CODE/load_table.sh S2_wtRNA.sort.sam testRNA rnalibs 2 &
 
-Repeat for the other RNA libraries with appropriate arguments, for example: Hrp48_HyperTRIBE_rep1.sort.sam testRNA rnalibs 3; Hrp48_HyperTRIBE_rep2.sort.sam testRNA rnalibs 4; HyperADARcd_rep1.sort.sam testRNA rnalibs 3
+Repeat for the other RNA libraries with appropriate arguments, for example: Hrp48_HyperTRIBE_rep1.sort.sam testRNA rnalibs 3; Hrp48_HyperTRIBE_rep2.sort.sam testRNA rnalibs 4; HyperADARcd_rep1.sort.sam testRNA rnalibs 5
 
 **Carefully note the last three arguments for all the load_table.sh runs for each library because these values are needed in the next step of the analysis. The expt_name cannot be longer than 20 characters**
 
