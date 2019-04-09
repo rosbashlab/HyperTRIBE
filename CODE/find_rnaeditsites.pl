@@ -12,6 +12,7 @@ $| = 1;
 # Identifies RNA editing sites from RNA sequencing data relative to a genomic dataset.  
 # Bed file data containing read counts of each nucleotide per genomic coordinate must be uploaded to mysql database.
 # Editing sites will be written to an user defined output file (-o flag) 
+# The gDNA/wtRNA is used as reference to call edit sites
 
 my $USAGE = "find_rnaeditsites.pl -a annotationfile -t RNAtablename -e RNAexp -c tp -o outfile -g gDNA_tablename -j gDNA_exp -k gDNA_tp\n OR find_rnaeditsites.pl -a annotationfile -t RNAtablename -e RNAexp -c tp -o outfile -g wtRNA_tablename -j wtRNA_exp -k wtRNA_tp\n"; 
 my %option;
