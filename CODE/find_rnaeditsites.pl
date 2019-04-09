@@ -55,7 +55,6 @@ if ( $option{a} && $option{t} && $option{g} && $option{e} && $option{o} && $opti
     } else {
         die "value for tp is not being set";
     }
-#    $tp = $option{c};
 } else {
     print "annotationfile = $option{a};\n
     tablename = $option{t};\n
@@ -68,15 +67,6 @@ if ( $option{a} && $option{t} && $option{g} && $option{e} && $option{o} && $opti
 
     die "all the variables are not being passed properly at n04rnaeditID.pl";
 }
-
-#print "annotationfile = $option{a};\n
-#    tablename = $option{t};\n
-#    exp = $option{e};\n
-#    gDNAtablename = $option{g};\n
-#    OUTFILE = $option{o};\n
-#    tp = $option{c};\n";#
-#
-#die "text die;";
 
 #MYSQL EDITING VARIABLES
 my %gstrings = ("A"=>"g.Acount","T"=>"g.Tcount","C"=>"g.Ccount","G"=>"g.Gcount");
@@ -91,43 +81,13 @@ my %complement = ("A"=>"T","T"=>"A","C"=>"G","G"=>"C");
 
 my $filesuffix = $noneditbase . $editbase;
 
-#read the annotatation file is in refflat format, with "all field from selected tables"
-open(FH,$annotationfile) or die $!;
-my $genes = {};
-while(<FH>){
-    chomp;
-    my $line = $_;
-    next if ($line=~/^[\#\n]/); # skip header line
-    next if ($line=~/^name/); # skip header line
-    
-    my($gene,$chr,$strand,$sString,$eString) = (split(/\t/,$line))[0,2,3,9,10]; #fly
-    next if ($chr=~/chrUextra/); #the annotations in chrUextra are not considered
-    next if ($gene=~/^His.*:/); #remove the Histone genes
-#    if ($gene=~/^His.*:/) {
-#	print STDERR "$gene\n";
-#	next;
-#    }
-    next if ($gene=~/^snmRNA*:/); #remove the snmRNA
+# read the annotatation file is in refflat format, with "all field from selected tables"
+# parse the annotation file and return a hash of genes
+my ($genes) = &parse_annotation_file($annotationfile);
 
-    my @starts = split(/\,/,$sString);
-    my @ends = split(/\,/,$eString);
-    for (my $i = 0; $i <= $#starts;$i++){
-	if(exists($genes->{$chr}->{$gene}->{$starts[$i]})){
-	    if($genes->{$chr}->{$gene}->{$starts[$i]}->{END} < $ends[$i]){
-		$genes->{$chr}->{$gene}->{$starts[$i]}->{END} = $ends[$i];
-	    }
-	} else{
-	    $genes->{$chr}->{$gene}->{$starts[$i]} = {END=>$ends[$i],TYPE=>"CODING",ID=>$gene,STRAND=>$strand};
-	}
-    }
-}
-close FH;
-
-
-#my $OUTFILE = "rnaedit_$exp\.$filesuffix\.txt";
 open(OUT,">$OUTFILE") or die $!;
 
-#OUTPUT ANY INSTANCE OF AN EDITING EVENT. 
+#OUTPUT ANY INSTANCE OF AN EDITING EVENT
 print OUT "Chr\tEdit_coord\tName\tType\tA_count\tT_count\tC_count\tG_count\tTotal_count\tA_count_gDNA/wtRNA\tT_count_gDNA/wtRNA\tC_count_gDNA/wtRNA\tG_count_gDNA/wtRNA\tTotal_count_gDNA/wtRNA\tEditbase_count\tTotal_count\tEditbase_count_gDNA/wtRNA\tTotal_count_gDNA/wtRNA\n";
 
 foreach my $chr (keys %{$genes}){
@@ -219,7 +179,8 @@ sub min {
 }
 
 
-
+#---------------------------------
+# Print results from the SQL query of edit sites
 sub print_query_result {
     my ($execute1, $exonbases, $strand, $data, $Gconsdata, $chr, $gene) = @_; 
  
@@ -287,3 +248,42 @@ sub print_query_result {
     return;
 }
 
+
+#--------------------
+#parse annotation file in refflat format and return a hash with parsed data
+sub parse_annotation_file {
+    my ($annotationfile) = @_;
+    #read the annotatation file should be in refflat format, with "all field from selected tables"
+    open(FH,$annotationfile) or die $!;
+    my $genes = {};
+    while(<FH>){
+	chomp;
+	my $line = $_;
+	next if ($line=~/^[\#\n]/); # skip empty lines or lines with comments
+	next if (($line=~/strand/i) || ($line=~/^name/)); # skip header line
+	my($gene,$chr,$strand,$sString,$eString) = (split(/\t/,$line))[0,2,3,9,10]; #fly
+	next if ($chr=~/chrUextra/); #the annotations in chrUextra are not considered
+	next if ($gene=~/^His.*:/); #remove the Histone genes
+	#    if ($gene=~/^His.*:/) {
+	#	print STDERR "$gene\n";
+	#	next;
+	#    }
+	next if ($gene=~/^snmRNA*:/); #remove the snmRNA
+	
+	my @starts = split(/\,/,$sString);
+	my @ends = split(/\,/,$eString);
+	for (my $i = 0; $i <= $#starts;$i++){
+	    if(exists($genes->{$chr}->{$gene}->{$starts[$i]})){
+		if($genes->{$chr}->{$gene}->{$starts[$i]}->{END} < $ends[$i]){
+		    $genes->{$chr}->{$gene}->{$starts[$i]}->{END} = $ends[$i];
+		}
+	    } else{
+		$genes->{$chr}->{$gene}->{$starts[$i]} = {END=>$ends[$i],TYPE=>"CODING",ID=>$gene,STRAND=>$strand};
+	    }
+	}
+    }
+    close FH;
+    
+    return $genes;
+    
+}
