@@ -37,7 +37,12 @@ eval {
 };
 
 if ($@) {
-    print "Error in database creation: $@";
+    if ($@=~/already exists/) {
+	#no need to printt the error message if it the table already exists error
+    } else {
+	# else print the error message
+	print "Error in database creation: $@";
+    }
 }
 
 #load the table
