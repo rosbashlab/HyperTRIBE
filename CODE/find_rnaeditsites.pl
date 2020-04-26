@@ -130,10 +130,12 @@ foreach my $chr (keys %{$genes}){
 	
 	my $myquery1 = "SELECT a.*, g.* from $tablename as a, $gDNAtablename as g where a.experiment IN ('" . $exp . "') and a.time = '" . $tp . "' and a.chr = '" . $chr . "' and a.coord between '" . $left . "' and '" . $right . "'";
 	$myquery1 .=     " and g.experiment='" . $gexp . "' and g.time='" . $gDNAtp . "' and g.chr=a.chr and g.coord=a.coord and g.totalcount>'" . $mincovthresh . "'";
-	if($strand eq "+"){$myquery1 .= " and $gstrings{$editbase} < '1' and ($gstrings{$noneditbase}/g.Totalcount) >= '0.8' and $rstrings{$editbase} > '0'";}
-	elsif($strand eq "-"){$myquery1 .= " and $gstrings{$editbaseREV} < '1' and ($gstrings{$noneditbaseREV}/g.Totalcount) >= '0.8' and $rstrings{$editbaseREV} > '0'";}
+#	if($strand eq "+"){$myquery1 .= " and $gstrings{$editbase} < '1' and ($gstrings{$noneditbase}/g.Totalcount) >= '0.8' and $rstrings{$editbase} > '0'";}
+#	elsif($strand eq "-"){$myquery1 .= " and $gstrings{$editbaseREV} < '1' and ($gstrings{$noneditbaseREV}/g.Totalcount) >= '0.8' and $rstrings{$editbaseREV} > '0'";}
 
-
+	if($strand eq "+"){$myquery1 .= " and ($gstrings{$editbase}/g.Totalcount) < '0.005' and ($gstrings{$noneditbase}/g.Totalcount) >= '0.8' and $rstrings{$editbase} > '0'";}
+	elsif($strand eq "-"){$myquery1 .= " and ($gstrings{$editbaseREV}/g.Totalcount) < '0.005' and ($gstrings{$noneditbaseREV}/g.Totalcount) >= '0.8' and $rstrings{$editbaseREV} > '0'";}
+	
 # execute the query
 	eval {
 	    $sth = $dbh->prepare($myquery1); 
