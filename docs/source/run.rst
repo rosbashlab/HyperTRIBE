@@ -107,7 +107,7 @@ Now, run the updated shell script from current directory
 
     ./rnaedit_gDNA_RNA.sh
 
-First "find_rnaeditsites.pl" is used conduct a comparison of gDNA against RNA for each nucleotide in the transcriptome to call a set of editing sites (minimum coverage of nucleotide in reference table is hard coded to be 9 nucleotide). Then, “Threshold_editsites_20reads.py” ensures that the editing sites have at least 10% editing and at least a coverage of 20 reads. The output for this shell script is a list of editing sites in bedgraph format, which is generated for each pairwise comparison. In this case there will be four bedgraph files with editing sites for: 1) S2_wtRNA: rnalibs_25_2_A2G.bedgraph; 2) HyperTRIBE_rep1: rnalibs_25_3_A2G.bedgraph; 3) HyperTRIBE_rep2: rnalibs_25_4_A2G.bedgraph; and 4) HyperADARcd_rep1: rnalibs_25_5_A2G.bedgraph
+First "find_rnaeditsites.pl" is used conduct a comparison of gDNA against RNA for each nucleotide in the transcriptome to call a set of editing sites (minimum coverage of nucleotide in reference table is hard coded to be 9 nucleotide). Then, “filter_by_threshold_without_header.pl” ensures that the editing sites have at least 5% editing and at least a coverage of 20 reads. The output for this shell script is a list of editing sites in bedgraph format, which is generated for each pairwise comparison. In this case there will be four bedgraph files with editing sites for: 1) S2_wtRNA: rnalibs_25_2_A2G.bedgraph; 2) HyperTRIBE_rep1: rnalibs_25_3_A2G.bedgraph; 3) HyperTRIBE_rep2: rnalibs_25_4_A2G.bedgraph; and 4) HyperADARcd_rep1: rnalibs_25_5_A2G.bedgraph
 
 
 
@@ -140,7 +140,7 @@ Now, run the updated shell script from current directory
 
     ./rnaedit_wtRNA_RNA.sh
 
-First "find_rnaeditsites.pl" is used conduct a comparison of wtRNA against RNA for each nucleotide in the transcriptome to call a set of editing sites. Then, “Threshold_editsites_20reads.py” ensures that the editing sites have at least 10% editing and at least a coverage of 20 reads. The output for this shell script is a list of editing sites in bedgraph format, which is generated for each pairwise comparison. In this case there will be three bedgraph files with editing sites for: 1) HyperTRIBE_rep1: rnalibs_2_3_A2G.bedgraph; 2) HyperTRIBE_rep2: rnalibs_2_4_A2G.bedgraph; and 3) HyperADARcd_rep1: rnalibs_2_5_A2G.bedgraph.
+First "find_rnaeditsites.pl" is used conduct a comparison of wtRNA against RNA for each nucleotide in the transcriptome to call a set of editing sites. Then, “filter_by_threshold_without_header.pl” ensures that the editing sites have at least 5% editing and at least a coverage of 20 reads. The output for this shell script is a list of editing sites in bedgraph format, which is generated for each pairwise comparison. In this case there will be three bedgraph files with editing sites for: 1) HyperTRIBE_rep1: rnalibs_2_3_A2G.bedgraph; 2) HyperTRIBE_rep2: rnalibs_2_4_A2G.bedgraph; and 3) HyperADARcd_rep1: rnalibs_2_5_A2G.bedgraph.
 
 
 4. Post-processing of editing outputsOutputs
