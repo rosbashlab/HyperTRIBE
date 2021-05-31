@@ -9,11 +9,11 @@ converts outoput from find_rnaeditsites.pl to bedgraph format. Creates a bed tra
 import sys
 # the first line of the 'arguement is always the name of the program
 if len(sys.argv)<2:  
-        print Usage
+        print (Usage)
 else:
         FileList = sys.argv[1:]
         for InfileName in FileList:
-                print InfileName
+                print (InfileName)
 
                 Infile = open (InfileName, 'r')
                 OutfileName = InfileName + '.bedgraph'
@@ -55,4 +55,4 @@ else:
                 Infile.close()
                 Outfile.close()
                             
-                print "Done, bed file created"
+                print("Done, bed file created")

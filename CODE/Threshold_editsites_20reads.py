@@ -28,10 +28,9 @@ TotalCountThreshold = 20
 PercentEditThreshold = 0.1
 
 if len(sys.argv)<2:  # the first line of the arguement is always the name of the program
-        print Usage
-else:
+        print(Usage)
+else:     
         FileList = sys.argv[1:]
-        
         for InfileName in FileList:
                 Infile = open (InfileName, 'r')
         
