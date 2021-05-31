@@ -14,7 +14,7 @@ Software Dependencies (tested version)
 - Perl (5.8.8, 5.12.5, 5.22.1) 
 - Perl module DBI.pm (1.631, 1.636) and DBD:mysql (4.042)
 - MySQL database (MySQL, MariDB)
-- Python (2.7.2, other versions should work)
+- Python (3.0 or above)
 - SRA Toolkit 
 
 Operating systems used: RHEL 5.11 and RHEL 7.2. HyperTRIBE is likely to work seamlessly with the latest version of these software/packages as well.
